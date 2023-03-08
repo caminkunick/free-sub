@@ -6,3 +6,4 @@ export * from "./content.header";
 export * from "./fs.button";
 export * from "./fs.list.item.button";
 export * from "./main.container";
+export * from "./table.grid";
