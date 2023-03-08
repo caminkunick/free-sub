@@ -30,6 +30,8 @@ export const FSButton = {
       Ok
     </Button>
   ),
+  Confirm: (props: ButtonProps) => <Button {...props}>Confirm</Button>,
+  Close: (props: ButtonProps) => <Button color="neutral" {...props}>Close</Button>
 };
 
 export const FSPopBtn = {
