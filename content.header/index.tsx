@@ -39,7 +39,7 @@ export const ContentHeader = (props: ContentHeaderProps) => {
   );
 
   return (
-    <Box display="flex" alignItems="center">
+    <Box display="flex" alignItems="center" sx={{ mb: 4 }}>
       <Box display="flex" flexDirection="column" flex={1}>
         {Array.isArray(props.breadcrumbs) && props.breadcrumbs.length && (
           <BreadcrumbsStyled>
