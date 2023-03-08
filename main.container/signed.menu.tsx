@@ -9,17 +9,23 @@ import {
   MenuProps,
 } from "@mui/material";
 import { signOut } from "firebase/auth";
+import { useRouter } from "next/router";
 import { useStore } from "../provider";
 
 export type SignedMenuProps = {
   onClose: () => void;
 } & Pick<MenuProps, "anchorEl">;
 export const SignedMenu = (props: SignedMenuProps) => {
-  const { store } = useStore();
+  const { store, dispatch } = useStore();
+  const route = useRouter();
 
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
     props.onClose();
-    store.auth && signOut(store.auth);
+    if (store.auth) {
+      await signOut(store.auth);
+      dispatch({ type: "auth", value: null });
+    }
+    route.push("/");
   };
 
   const content =
