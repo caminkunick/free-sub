@@ -2,6 +2,7 @@ import {
   AppBar,
   Avatar,
   AvatarProps,
+  Box,
   IconButton,
   IconButtonProps,
   Link,
@@ -9,18 +10,19 @@ import {
   styled,
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignIn, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faSignIn, faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 export const MainAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
   boxSizing: "border-box",
   borderBottom: `solid 1px ${theme.palette.divider}`,
-  top: 0
+  top: 0,
+  zIndex: 1201,
 }));
 MainAppBar.defaultProps = {
   elevation: 0,
-  position: "sticky"
-}
+  position: "sticky",
+};
 
 export const UserButton = {
   Signed: ({ src, ...props }: IconButtonProps & Pick<AvatarProps, "src">) => (
@@ -45,3 +47,18 @@ export const UserButton = {
     </IconButton>
   ),
 };
+
+export type MainContentProps = { dense?: boolean; sidebar?: boolean };
+export const MainContent = styled(Box, {
+  shouldForwardProp: (prop) => !["dense", "sidebar"].includes(prop.toString()),
+})<MainContentProps>(({ theme, dense, sidebar }) => ({
+  paddingTop: theme.spacing(dense ? 0 : 6),
+  paddingBottom: theme.spacing(6),
+  marginLeft: sidebar ? theme.mixins.sidebar.width : 0,
+}));
+
+export const BarsButton = (props: IconButtonProps) => (
+  <IconButton edge="start" {...props}>
+    <FontAwesomeIcon icon={faBars} />
+  </IconButton>
+);

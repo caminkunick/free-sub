@@ -1,6 +1,7 @@
 import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  List,
   ListItemButton,
   ListItemIcon,
   ListItemText,
@@ -21,6 +22,11 @@ export const SignedMenu = (props: SignedMenuProps) => {
     store.auth && signOut(store.auth);
   };
 
+  const content =
+    store.signedMenu instanceof Function
+      ? store.signedMenu(store.claims)
+      : store.signedMenu;
+
   return (
     <Menu
       open={Boolean(props.anchorEl)}
@@ -28,14 +34,17 @@ export const SignedMenu = (props: SignedMenuProps) => {
       onClose={props.onClose}
       anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       transformOrigin={{ vertical: "top", horizontal: "right" }}
-      MenuListProps={{ dense: true, disablePadding: true }}
+      MenuListProps={{ disablePadding: true }}
     >
-      <ListItemButton onClick={handleSignOut} sx={{ color: "error.main" }}>
-        <ListItemIcon sx={{ color: "inherit" }}>
-          <FontAwesomeIcon icon={faSignOut} />
-        </ListItemIcon>
-        <ListItemText primary="Sign Out" />
-      </ListItemButton>
+      <List dense disablePadding>
+        {content}
+        <ListItemButton onClick={handleSignOut} sx={{ color: "error.main" }}>
+          <ListItemIcon sx={{ color: "inherit" }}>
+            <FontAwesomeIcon icon={faSignOut} />
+          </ListItemIcon>
+          <ListItemText primary="Sign Out" />
+        </ListItemButton>
+      </List>
     </Menu>
   );
 };
