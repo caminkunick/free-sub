@@ -3,7 +3,7 @@ import {
   createTheme,
   CssBaseline,
   ThemeProvider,
-  useMediaQuery
+  useMediaQuery,
 } from "@mui/material";
 import { FirebaseApp } from "firebase/app";
 import {
@@ -24,6 +24,8 @@ import {
 import { Firestore, getFirestore } from "firebase/firestore";
 import { defaultTheme } from "./default.theme";
 import { watchDarkmode } from "./watch.darkmode";
+import { Popup } from "../popup";
+import { PopupValue } from "../popup/popup.value";
 
 //SECTION - Store
 //ANCHOR - StoreAction
@@ -31,7 +33,8 @@ export type StoreAction =
   | { type: "dark"; value: boolean }
   | { type: "app"; value: FirebaseApp }
   | { type: "auth"; value: User | null; claims?: ParsedToken }
-  | { type: "sign-menu"; value: Store["signedMenu"] };
+  | { type: "sign-menu"; value: Store["signedMenu"] }
+  | { type: "popup"; value: PopupValue | null };
 //ANCHOR - Store
 export class Store {
   dark: boolean;
@@ -45,6 +48,7 @@ export class Store {
   claims: ParsedToken | null;
 
   signedMenu: ReactNode | ((claims: ParsedToken | null) => ReactNode);
+  popup: PopupValue | null;
 
   //ANCHOR - constructor
   constructor(data?: Partial<Store>) {
@@ -59,6 +63,7 @@ export class Store {
     this.claims = data?.claims ?? null;
 
     this.signedMenu = data?.signedMenu ?? <></>;
+    this.popup = data?.popup ?? null;
   }
 
   //ANCHOR - reducer
@@ -82,6 +87,8 @@ export class Store {
         });
       case "sign-menu":
         return new Store({ ...store, signedMenu: action.value });
+      case "popup":
+        return new Store({ ...store, popup: action.value });
       default:
         return store;
     }
@@ -93,11 +100,11 @@ export class Store {
 const MainContext = createContext<{
   store: Store;
   dispatch: Dispatch<StoreAction>;
-  mobile: boolean
+  mobile: boolean;
 }>({
   store: new Store(),
   dispatch: () => {},
-  mobile: false
+  mobile: false,
 });
 
 //ANCHOR - useStore
@@ -145,6 +152,7 @@ export const Provider = (props: ProviderProps) => {
       <ThemeProvider theme={createTheme(defaultTheme(store.dark))}>
         <CssBaseline />
         {props.children}
+        <Popup />
       </ThemeProvider>
     </MainContext.Provider>
   );
