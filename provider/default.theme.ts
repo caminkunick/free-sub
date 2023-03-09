@@ -14,6 +14,8 @@ declare module "@mui/material/styles/createMixins" {
   interface Mixins {
     sidebar: CSSProperties;
     absoluteFluid: CSSProperties;
+    fixedFullScreen: CSSProperties;
+    flexColumnCenter: CSSProperties;
   }
 }
 
@@ -34,6 +36,19 @@ export const defaultTheme = (dark?: boolean): ThemeOptions => ({
       left: 0,
       width: "100%",
       height: "100%",
+    },
+    fixedFullScreen: {
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+    },
+    flexColumnCenter: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
     },
   },
   palette: {
