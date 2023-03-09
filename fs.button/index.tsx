@@ -1,11 +1,19 @@
 import {
   faCheck,
+  faFolderOpen,
   faPlus,
+  faShoppingCart,
   faTrash,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, ButtonProps } from "@mui/material";
+import { FSNumber } from "free-sub/ctrl/number";
+import { forwardRef, InputHTMLAttributes, memo } from "react";
+
+export type FSButtonBrowse = InputHTMLAttributes<HTMLInputElement> & {
+  buttonProps?: Omit<ButtonProps, "component">;
+};
 
 export const FSButton = {
   Add: (props: ButtonProps) => (
@@ -31,7 +39,46 @@ export const FSButton = {
     </Button>
   ),
   Confirm: (props: ButtonProps) => <Button {...props}>Confirm</Button>,
-  Close: (props: ButtonProps) => <Button color="neutral" {...props}>Close</Button>
+  Close: (props: ButtonProps) => (
+    <Button color="neutral" {...props}>
+      Close
+    </Button>
+  ),
+  Browse: memo(
+    forwardRef<HTMLInputElement, FSButtonBrowse>(
+      ({ buttonProps, ...props }, ref) => (
+        <label>
+          <Button
+            variant="outlined"
+            component="span"
+            startIcon={<FontAwesomeIcon icon={faFolderOpen} />}
+            {...buttonProps}
+          >
+            {buttonProps?.children ?? "Browse"}
+          </Button>
+          <input
+            hidden
+            type="file"
+            accept="image/jpeg,image/png"
+            multiple
+            ref={ref}
+            {...props}
+          />
+        </label>
+      )
+    )
+  ),
+  Price: ({ price, ...props }: ButtonProps & { price: number }) => (
+    <Button
+      variant="contained"
+      disableElevation
+      startIcon={<FontAwesomeIcon icon={faShoppingCart} />}
+      sx={{ borderRadius: 16, paddingInline: 3 }}
+      {...props}
+    >
+      {FSNumber.separator(price)}
+    </Button>
+  ),
 };
 
 export const FSPopBtn = {

@@ -1,5 +1,5 @@
 import { PaletteColor, PaletteColorOptions, ThemeOptions } from "@mui/material";
-import { grey } from "@mui/material/colors";
+import { blue, grey } from "@mui/material/colors";
 
 declare module "@mui/material/styles" {
   interface Palette {
@@ -52,11 +52,22 @@ export const defaultTheme = (dark?: boolean): ThemeOptions => ({
     },
   },
   palette: {
+    primary: {
+      main: blue[500],
+    },
     neutral: {
       main: grey[600],
       contrastText: "#fff",
     },
+    background: dark
+      ? { default: "#222", paper: "#000" }
+      : { default: "#F6F6F6" },
     mode: dark ? "dark" : "light",
+  },
+  typography: {
+    caption: {
+      fontSize: 12,
+    },
   },
   components: {
     MuiIconButton: {

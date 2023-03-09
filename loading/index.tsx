@@ -27,19 +27,19 @@ const LoadingIcon = styled((props) => (
     background: "#fff",
     animationTimingFunction: "cubic-bezier(0, 1, 1, 0)",
   },
-  "& div:nth-child(1)": {
+  "& div:nth-of-type(1)": {
     left: 8,
     animation: "lds-ellipsis1 0.6s infinite",
   },
-  "& div:nth-child(2)": {
+  "& div:nth-of-type(2)": {
     left: 8,
     animation: "lds-ellipsis2 0.6s infinite",
   },
-  "& div:nth-child(3)": {
+  "& div:nth-of-type(3)": {
     left: 32,
     animation: "lds-ellipsis2 0.6s infinite",
   },
-  "& div:nth-child(4)": {
+  "& div:nth-of-type(4)": {
     left: 56,
     animation: "lds-ellipsis3 0.6s infinite",
   },

@@ -22,6 +22,7 @@ import {
   User,
 } from "firebase/auth";
 import { Firestore, getFirestore } from "firebase/firestore";
+import { getStorage, FirebaseStorage } from "firebase/storage";
 import { defaultTheme } from "./default.theme";
 import { watchDarkmode } from "./watch.darkmode";
 import { Popup } from "../popup";
@@ -42,6 +43,7 @@ export class Store {
   app: FirebaseApp | null;
   db: Firestore | null;
   auth: Auth | null;
+  storage: FirebaseStorage | null;
 
   userloading: boolean;
   user: User | null;
@@ -57,6 +59,7 @@ export class Store {
     this.app = data?.app ?? null;
     this.db = data?.db ?? null;
     this.auth = data?.auth ?? null;
+    this.storage = data?.storage ?? null;
 
     this.userloading = data?.userloading ?? true;
     this.user = data?.user ?? null;
@@ -77,6 +80,7 @@ export class Store {
           app: action.value,
           db: getFirestore(action.value),
           auth: getAuth(action.value),
+          storage: getStorage(action.value),
         });
       case "auth":
         return new Store({

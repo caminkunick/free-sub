@@ -1,5 +1,9 @@
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
-import { faChevronLeft, faUserSlash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBan,
+  faChevronLeft,
+  faUserSlash,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box, Button, Container, Typography } from "@mui/material";
 import Link from "next/link";
@@ -17,6 +21,7 @@ const Root = (props: RootProps) => {
           <Typography
             variant="h3"
             fontWeight={"bold"}
+            textAlign="center"
             sx={{ mt: 3 }}
             color="textSecondary"
           >
@@ -42,5 +47,8 @@ const Root = (props: RootProps) => {
 export const Restrict = {
   AccessDenied: (props: Partial<RootProps>) => (
     <Root icon={faUserSlash} label="Access Denied" {...props} />
+  ),
+  NotFound: (props: Partial<RootProps>) => (
+    <Root icon={faBan} label="Not Found" {...props} />
   ),
 };
