@@ -8,6 +8,18 @@ import {
 
 export type FSImageItem = { name: string; url: string };
 export class FSImage {
+  url: string;
+  pos: Record<"left" | "top", string> | null;
+
+  constructor(data?: Partial<FSImage>) {
+    this.url = data?.url ?? "";
+    this.pos = data?.pos ?? null;
+  }
+
+  set<T extends keyof FSImage>(field: T, value: FSImage[T]): FSImage {
+    return new FSImage({ ...this, [field]: value });
+  }
+
   static compress(file: File) {
     return new Promise<FSImageItem | null>((resolve) => {
       var reader = new FileReader();

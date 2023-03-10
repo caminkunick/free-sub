@@ -1,5 +1,5 @@
 import { PaletteColor, PaletteColorOptions, ThemeOptions } from "@mui/material";
-import { blue, grey } from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 
 declare module "@mui/material/styles" {
   interface Palette {
@@ -25,10 +25,16 @@ declare module "@mui/material/Button" {
   }
 }
 
+declare module "@mui/material/Fab" {
+  interface FabPropsColorOverrides {
+    neutral: true;
+  }
+}
+
 export const defaultTheme = (dark?: boolean): ThemeOptions => ({
   mixins: {
     sidebar: {
-      width: 252,
+      width: 272,
     },
     absoluteFluid: {
       position: "absolute",
@@ -53,7 +59,23 @@ export const defaultTheme = (dark?: boolean): ThemeOptions => ({
   },
   palette: {
     primary: {
-      main: blue[500],
+      main: "#4285F4",
+    },
+    success: {
+      main: "#34A853",
+      contrastText: "#FFFFFF",
+    },
+    warning: {
+      main: "#FBBC05",
+      contrastText: "#FFFFFF",
+    },
+    info: {
+      main: "#4285F4",
+      contrastText: "#FFFFFF",
+    },
+    error: {
+      main: "#EA4335",
+      contrastText: "#FFFFFF",
     },
     neutral: {
       main: grey[600],

@@ -1,6 +1,7 @@
 import {
   faCheck,
   faFolderOpen,
+  faImage,
   faPlus,
   faShoppingCart,
   faTrash,
@@ -36,6 +37,16 @@ export const FSButton = {
       {...props}
     >
       Ok
+    </Button>
+  ),
+  ChangeImage: (props: ButtonProps) => (
+    <Button
+      fullWidth
+      variant="outlined"
+      startIcon={<FontAwesomeIcon icon={faImage} />}
+      {...props}
+    >
+      Change
     </Button>
   ),
   Confirm: (props: ButtonProps) => <Button {...props}>Confirm</Button>,
@@ -77,6 +88,16 @@ export const FSButton = {
       {...props}
     >
       {FSNumber.separator(price)}
+    </Button>
+  ),
+  Remove: (props: ButtonProps) => (
+    <Button
+      variant="outlined"
+      color="error"
+      startIcon={<FontAwesomeIcon icon={faTrash} />}
+      {...props}
+    >
+      Remove
     </Button>
   ),
 };
