@@ -15,5 +15,6 @@ export * from "./loading";
 export * from "./main.container";
 export * from "./popup/popup.value";
 export * from "./restrict";
+export * from "./status.badge";
 export * from "./table.grid";
 export * from "./youtube.iframe";
