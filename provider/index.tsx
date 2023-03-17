@@ -27,6 +27,11 @@ import { defaultTheme } from "./default.theme";
 import { watchDarkmode } from "./watch.darkmode";
 import { Popup } from "../popup";
 import { PopupValue } from "../popup/popup.value";
+import { initI18Next } from "../translate";
+import { useTranslation } from "react-i18next";
+import { TFunction } from "../translate/en_th";
+
+initI18Next()
 
 //SECTION - Store
 //ANCHOR - StoreAction
@@ -105,10 +110,12 @@ const MainContext = createContext<{
   store: Store;
   dispatch: Dispatch<StoreAction>;
   mobile: boolean;
+  t: TFunction
 }>({
   store: new Store(),
   dispatch: () => {},
   mobile: false,
+  t: () => ""
 });
 
 //ANCHOR - useStore
@@ -124,6 +131,7 @@ export type ProviderProps = Pick<BoxProps, "children"> & {
 export const Provider = (props: ProviderProps) => {
   const [store, dispatch] = useReducer(Store.reducer, new Store());
   const mobile = useMediaQuery("(max-width:600px)");
+  const { t } = useTranslation()
 
   useEffect(() => {
     dispatch({ type: "app", value: props.app });
@@ -152,7 +160,7 @@ export const Provider = (props: ProviderProps) => {
   }, [props]);
 
   return (
-    <MainContext.Provider value={{ store, dispatch, mobile }}>
+    <MainContext.Provider value={{ store, dispatch, mobile, t }}>
       <ThemeProvider theme={createTheme(defaultTheme(store.dark))}>
         <CssBaseline />
         {props.children}
