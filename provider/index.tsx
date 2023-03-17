@@ -1,4 +1,5 @@
 import {
+  AlertColor,
   BoxProps,
   createTheme,
   CssBaseline,
@@ -30,8 +31,9 @@ import { PopupValue } from "../popup/popup.value";
 import { initI18Next } from "../translate";
 import { useTranslation } from "react-i18next";
 import { TFunction } from "../translate/en_th";
+import { AlertItemValue, Alerts } from "../alerts";
 
-initI18Next()
+initI18Next();
 
 //SECTION - Store
 //ANCHOR - StoreAction
@@ -40,7 +42,10 @@ export type StoreAction =
   | { type: "app"; value: FirebaseApp }
   | { type: "auth"; value: User | null; claims?: ParsedToken }
   | { type: "sign-menu"; value: Store["signedMenu"] }
-  | { type: "popup"; value: PopupValue | null };
+  | { type: "popup"; value: PopupValue | null }
+  | { type: "addalert"; value: ReactNode; severity?: AlertColor }
+  | { type: "removealert"; value: string };
+
 //ANCHOR - Store
 export class Store {
   dark: boolean;
@@ -56,6 +61,7 @@ export class Store {
 
   signedMenu: ReactNode | ((claims: ParsedToken | null) => ReactNode);
   popup: PopupValue | null;
+  alerts: AlertItemValue[];
 
   //ANCHOR - constructor
   constructor(data?: Partial<Store>) {
@@ -72,6 +78,22 @@ export class Store {
 
     this.signedMenu = data?.signedMenu ?? <></>;
     this.popup = data?.popup ?? null;
+    this.alerts = data?.alerts ?? [];
+  }
+
+  Alert() {
+    return {
+      add: (label: ReactNode, severity?: AlertColor): Store => {
+        this.alerts = this.alerts.concat(
+          new AlertItemValue({ label, severity })
+        );
+        return new Store(this);
+      },
+      remove: (key: string): Store => {
+        this.alerts = this.alerts.filter((a) => a.key !== key);
+        return new Store(this);
+      },
+    };
   }
 
   //ANCHOR - reducer
@@ -98,6 +120,10 @@ export class Store {
         return new Store({ ...store, signedMenu: action.value });
       case "popup":
         return new Store({ ...store, popup: action.value });
+      case "addalert":
+        return store.Alert().add(action.value, action.severity);
+      case "removealert":
+        return store.Alert().remove(action.value);
       default:
         return store;
     }
@@ -110,12 +136,12 @@ const MainContext = createContext<{
   store: Store;
   dispatch: Dispatch<StoreAction>;
   mobile: boolean;
-  t: TFunction
+  t: TFunction;
 }>({
   store: new Store(),
   dispatch: () => {},
   mobile: false,
-  t: () => ""
+  t: () => "",
 });
 
 //ANCHOR - useStore
@@ -131,7 +157,7 @@ export type ProviderProps = Pick<BoxProps, "children"> & {
 export const Provider = (props: ProviderProps) => {
   const [store, dispatch] = useReducer(Store.reducer, new Store());
   const mobile = useMediaQuery("(max-width:600px)");
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   useEffect(() => {
     dispatch({ type: "app", value: props.app });
@@ -163,6 +189,7 @@ export const Provider = (props: ProviderProps) => {
     <MainContext.Provider value={{ store, dispatch, mobile, t }}>
       <ThemeProvider theme={createTheme(defaultTheme(store.dark))}>
         <CssBaseline />
+        <Alerts />
         {props.children}
         <Popup />
       </ThemeProvider>

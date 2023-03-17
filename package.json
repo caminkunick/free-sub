@@ -23,6 +23,7 @@
     "i18next": "^22.4.12",
     "i18next-browser-languagedetector": "^7.0.1",
     "moment": "^2.29.4",
+    "react-addons-update": "^15.6.3",
     "react-draft-wysiwyg": "^1.15.0",
     "react-i18next": "^12.2.0"
   },
@@ -30,6 +31,7 @@
     "@types/draft-js": "^0.11.10",
     "@types/draftjs-to-html": "^0.8.1",
     "@types/html-to-draftjs": "^1.4.0",
+    "@types/react-addons-update": "^0.14.21",
     "@types/react-draft-wysiwyg": "^1.13.4"
   }
 }
