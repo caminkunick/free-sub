@@ -1,4 +1,5 @@
 import { faImage } from "@fortawesome/free-solid-svg-icons";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import {
   FontAwesomeIcon,
   FontAwesomeIconProps,
@@ -34,6 +35,9 @@ const Title = styled(Box)(({ theme }) => ({
 
 export type DialogCompactProps = {
   children?: ReactNode;
+  title?: ReactNode;
+  icon?: IconDefinition;
+  actions?: ReactNode;
   componentProps?: {
     dialog?: DialogProps;
     titleRoot?: BoxProps;
@@ -63,11 +67,13 @@ export const DialogCompact = (props: DialogCompactProps) => {
           fontWeight="bold"
           {...props.componentProps?.title}
         >
-          Preview
+          {props.title}
         </Typography>
       </Title>
       {props.children}
       <DialogActions>
+        <Box flex={1} />
+        {props.actions}
         <FSButton.Close onClick={() => props.onClose?.({}, "escapeKeyDown")} />
       </DialogActions>
     </DialogStyled>
