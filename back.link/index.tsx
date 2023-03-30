@@ -1,4 +1,4 @@
-import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft } from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, List, ListItem } from "@mui/material";
 import { useStore } from "free-sub/provider";

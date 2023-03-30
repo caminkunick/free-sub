@@ -1,4 +1,4 @@
-import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import { faQuestionCircle } from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Box,

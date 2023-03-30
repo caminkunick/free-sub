@@ -4,7 +4,7 @@ import {
   faEdit,
   faPlusCircle,
   faTrash,
-} from "@fortawesome/free-solid-svg-icons";
+} from "@fortawesome/pro-regular-svg-icons";
 import { ReactNode } from "react";
 
 export type PopupValueType = "alert" | "confirm" | "prompt" | "remove";

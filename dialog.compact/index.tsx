@@ -1,4 +1,4 @@
-import { faImage } from "@fortawesome/free-solid-svg-icons";
+import { faImage } from "@fortawesome/pro-regular-svg-icons";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import {
   FontAwesomeIcon,

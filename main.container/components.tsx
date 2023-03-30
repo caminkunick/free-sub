@@ -10,7 +10,7 @@ import {
   styled,
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faSignIn, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faSignIn, faSpinner } from "@fortawesome/pro-regular-svg-icons";
 
 export const MainAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,

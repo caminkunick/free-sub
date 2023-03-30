@@ -5,7 +5,7 @@ import {
   faShoppingCart,
   faTrash,
   faXmark,
-} from "@fortawesome/free-solid-svg-icons";
+} from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, ButtonProps } from "@mui/material";
 import { FSNumber } from "free-sub/ctrl/number";

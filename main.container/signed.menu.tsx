@@ -1,4 +1,4 @@
-import { faSignOut } from "@fortawesome/free-solid-svg-icons";
+import { faSignOut } from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   List,

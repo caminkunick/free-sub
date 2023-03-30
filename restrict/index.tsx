@@ -3,7 +3,7 @@ import {
   faBan,
   faChevronLeft,
   faUserSlash,
-} from "@fortawesome/free-solid-svg-icons";
+} from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box, Button, Container, Typography } from "@mui/material";
 import Link from "next/link";
