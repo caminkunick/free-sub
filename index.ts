@@ -1,7 +1,3 @@
-export * from "@fortawesome/react-fontawesome";
-export * from "@fortawesome/pro-regular-svg-icons";
-export * as xdatagrid from "@mui/x-data-grid";
-export * from "@mui/material";
 export * from "./absatz";
 export * from "./back.link";
 export * from "./card";
