@@ -6,6 +6,7 @@ import {
   Typography,
   TypographyProps,
 } from "@mui/material";
+import Image from "next/image";
 import { useState } from "react";
 import { DialogCompact } from "../dialog.compact";
 
@@ -31,11 +32,7 @@ const ImageGalleryTitleTypography = styled(Typography)({});
 export const ImageGalleryTitle = (props: TypographyProps) => {
   return (
     <Grid item xs={12}>
-      <ImageGalleryTitleTypography
-        variant="h5"
-        fontWeight="bold"
-        {...props}
-      />
+      <ImageGalleryTitleTypography variant="h5" fontWeight="bold" {...props} />
     </Grid>
   );
 };
@@ -57,12 +54,13 @@ const ImageGalleryItemRoot = styled(Box)({
 const ImageGalleryItemPopup = (props: {
   open: boolean;
   onClose: () => void;
-  src?: string;
+  src: string;
 }) => {
   return (
     <DialogCompact maxWidth="md" open={props.open} onClose={props.onClose}>
-      <img
+      <Image
         src={props.src}
+        alt="view"
         style={{ height: "calc(100vh - 400px)", objectFit: "contain" }}
       />
     </DialogCompact>
@@ -70,7 +68,7 @@ const ImageGalleryItemPopup = (props: {
 };
 
 export type ImageGalleryItemProps = {
-  url?: string;
+  url: string;
 };
 
 export const ImageGalleryItem = (props: ImageGalleryItemProps) => {
@@ -79,7 +77,7 @@ export const ImageGalleryItem = (props: ImageGalleryItemProps) => {
   return (
     <Grid item xs={12} sm={6} md={4}>
       <ImageGalleryItemRoot onClick={() => setOpen(true)}>
-        {props.url && <img src={props.url} />}
+        {props.url && <Image src={props.url} alt={"view"} />}
       </ImageGalleryItemRoot>
       <ImageGalleryItemPopup
         src={props.url}

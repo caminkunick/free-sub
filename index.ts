@@ -6,7 +6,6 @@ export * from "./absatz";
 export * from "./back.link";
 export * from "./card";
 export * from "./content.header";
-export * from "./data.grid.editor";
 export * from "./dialog.compact";
 export * from "./detail.box";
 export * from "./fs.button";
